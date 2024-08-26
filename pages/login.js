@@ -65,14 +65,14 @@ export default function Login() {
       <>
         <ThemeButton absolute={true} />
         <main id='main' className={`bg-slate-100 dark:bg-slate-800 min-h-screen transition-opacity duration-500 ${pageVisible ? 'opacity-100' : 'opacity-0'}`}>
-          <section className='sm:px-10 px-5 py-5'>
+          <section className='sm:px-10 px-2 py-5'>
             <div className="flex justify-center">
               <div className='flex flex-col gap-10 max-w-screen-xs w-full'>
-                <div className="flex gap-3 items-center justify-between border-b border-gray-300 pb-5">
+                <div className="flex flex-col sm:flex-row gap-3 items-center justify-between border-b border-gray-300 pb-5">
                   <Logo />
                   <h1 className='text-lg font-semibold text-slate-700 dark:text-white'>HR Management Portal</h1>
                 </div>
-                <div className='flex flex-col gap-5 border border-slate-300 p-8 rounded-lg bg-white dark:bg-slate-900 dark:border-slate-700 shadow-md'>
+                <div className='flex flex-col gap-5 border border-slate-300 sm:px-8 px-5 py-8 rounded-lg bg-white dark:bg-slate-900 dark:border-slate-700 shadow-md'>
                   <form id='form' className='flex flex-col gap-5 rounded-sm' onSubmit={submitHandler}>
                     <h1 className='text-slate-800 dark:text-white font-semibold text-xl text-center'>Log In as Employee</h1>
                     <div className='flex flex-col gap-3'>
