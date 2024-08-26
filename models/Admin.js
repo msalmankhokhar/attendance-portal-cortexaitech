@@ -3,12 +3,12 @@ import mongoose from 'mongoose'
 const schema = new mongoose.Schema({
     email : { type : String, required : true, unique: true },
     password : { type : String, required : true },
-    name : { type : String, required : true },
-    designation : { type : mongoose.Schema.Types.ObjectId, ref: 'designation' },
-    company : { type: mongoose.Schema.Types.ObjectId, required : true, ref: 'company' }
+    firstName : { type : String, required : true },
+    lastName : { type : String, required : false },
+    role : { type : mongoose.Schema.Types.ObjectId, ref: 'role', required : false }
 })
 
 mongoose.models = {}
-const Model = mongoose.model('admin', schema)
-Model.createIndexes()
-export default Model
+const Admin = mongoose.model('admin', schema)
+Admin.createIndexes()
+export default Admin
