@@ -1,46 +1,32 @@
 // Next.js API route support: https://nextjs.org/docs/api-routes/introduction
 import connectDB from "@/middlewares/db";
 import Admin from "@/models/Admin";
-import Designation from '@/models/Designation';
-import Company from '@/models/Company'
+import Role from '@/models/Role';
 
 async function handler(req, res) {
   const response = { success: true }
   if (req.method == 'POST') {
-    const { name, email, password, company, designation } = req.body
+    const { name, email, password, role } = req.body
     try {
       const newAdmin = new Admin({ name, email, password })
-      
-      // If the input company already exists in database, then dont create a new company otherwise make a new company and assign it to the admin
-      const companyAlreadyInDatabase = await Company.findOne({ title: company })
-      let newCompany
-      if (companyAlreadyInDatabase) {
-        newAdmin.company = companyAlreadyInDatabase
-        console.log("company already in db", companyAlreadyInDatabase.title);
-      } else {
-        console.log("making new company");
-        newCompany = new Company({ title: company })
-        await newCompany.save()
-        newAdmin.company = newCompany
-      }
 
-      // Checking wether its a designation in the request body, because its optional for Admin
-      if (designation) {
-        // If the input designation already exists in database, then dont create a new designation otherwise make a new designation and assign it to the admin
-        const designationAlreadyInDatabase = await Designation.findOne({ title: designation })
-        if (designationAlreadyInDatabase) {
-          newAdmin.designation = designationAlreadyInDatabase
+      // Checking wether its a role in the request body, because its optional for Admin
+      if (role) {
+        // If the input role already exists in database, then dont create a new role otherwise make a new role and assign it to the admin
+        const roleAlreadyInDatabase = await Role.findOne({ title: role })
+        if (roleAlreadyInDatabase) {
+          newAdmin.role = roleAlreadyInDatabase
         } else {
-          const newDesignation = new Designation({ title: designation, company: newAdmin.company })
-          await newDesignation.save()
-          newAdmin.designation = newDesignation
+          const newRole = new Role({ title: role })
+          await newRole.save()
+          newAdmin.role = newRole
         }
       }
 
       await newAdmin.save()
       res.status(200).json({
         ...response,
-        msg: `${name} successfully signed up as an Admin for ${company}`,
+        msg: `${name} successfully signed up as an Admin`,
         "added in database": newAdmin
       })
     } catch (error) {
