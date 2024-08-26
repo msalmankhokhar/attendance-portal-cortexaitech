@@ -53,7 +53,7 @@ export default function Index() {
           setLoadingAttendanceList(false)
           setAttendanceList(json.attendanceList)
         } else{
-          // mappedtoast(json.msgType, json.msg)
+          mappedtoast(json.msgType, json.msg)
         }
       } catch (error) {
         console.log(error.toString())
@@ -160,7 +160,7 @@ export default function Index() {
             toast.error("Cannot Connect to the server")
           })
       }else{
-        toast('Please Log in to access dashboard')
+        // toast('Please Log in to access dashboard')
         router.push('/login')
       }
     } else{
