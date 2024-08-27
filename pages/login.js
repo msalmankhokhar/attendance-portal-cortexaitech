@@ -39,7 +39,7 @@ export default function Login() {
         toastMapper[json.msgType](json.msg);
       }
     } catch (error) {
-      console.log(response)
+      console.log(error)
       console.log("Failed to fetch", error)
       toast.error("Cannot Connect to the server")
       setLoading(false)
