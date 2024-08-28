@@ -1,5 +1,5 @@
 "use client"
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import Logo from './Logo'
 import Link from 'next/link'
 import { usePathname } from 'next/navigation'
@@ -17,6 +17,7 @@ import NavContentAdmin from './NavContent/NavContentAdmin'
 export default function Navbar({adminMode = false}) {
   const router = useRouter()
   const { user, setUser } = useContext(ContextData)
+  const { sideMenuOpenEmployee, setSideMenuOpenEmployee } = useContext(ContextData)
   const pathname = usePathname()
 
   const logOut = () => {
@@ -29,13 +30,11 @@ export default function Navbar({adminMode = false}) {
     }
     setUser({})
   }
-  // console.log(pathname.startsWith('/admin'))
 
   return (
-    <nav className="hidden lg:flex flex-col gap-7 py-3 px-3 w-full shadow-md dark:border-r-2 border-slate-600" style={{ minWidth: '240px', maxWidth: '240px' }}>
+    <nav className={`bg-white dark:bg-slate-950 lg:static transition-all duration-300 fixed z-20 top-0 bottom-0 flex flex-col gap-7 py-3 px-3 w-full shadow-md dark:border-r-2 border-slate-600 ${sideMenuOpenEmployee ? '' : 'menu-close'}`} style={{ minWidth: '240px', maxWidth: '240px' }}>
       <div className='flex flex-col gap-2'>
-        <Logo />
-        {/* <span className='dark:text-white font-semibold text-slate-600 text-sm self-center'>HR Management Portal</span> */}
+        <Logo className='logo-wrapper hidden lg:flex items-center gap-2'/>
       </div>
       { adminMode ? <NavContentAdmin/> : <NavContentEmployee /> }
       <hr />

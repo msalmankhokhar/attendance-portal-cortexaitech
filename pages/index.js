@@ -10,7 +10,7 @@ import { ContextData } from '@/Context'
 import { toast } from 'react-toastify'
 import { mappedtoast, toastMapper } from '@/Config'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faClipboardCheck, faClock, faClose, faGear, faL, faPeopleGroup, faPersonWalking, faTriangleExclamation } from '@fortawesome/free-solid-svg-icons'
+import { faBars, faClipboardCheck, faClock, faClose, faGear, faL, faPeopleGroup, faPersonWalking, faTriangleExclamation } from '@fortawesome/free-solid-svg-icons'
 import DashboardCard from '@/components/DashboardCard'
 import { getDateToday } from "@/Config";
 import { faCalendar, faCalendarCheck, faCalendarXmark, faCheckCircle } from '@fortawesome/free-regular-svg-icons'
@@ -30,6 +30,7 @@ export default function Index() {
   const [ checkInTimeToday, setCheckInTimeToday ] = useState(null)
   const [ checkOutTimeToday, setCheckOutTimeToday ] = useState(null)
   const [attendMarked, setAttendMarked] = useState(false);
+  const { sideMenuOpenEmployee, setSideMenuOpenEmployee } = useContext(ContextData)
   const isUserEmpty = useMemo(() => Object.keys(user).length === 0, [user])
   const dateToday = getDateToday()
 
@@ -183,6 +184,9 @@ export default function Index() {
             <div className="flex items-center gap-5">
               <div className='hidden lg:flex text-base text-gray-600 dark:text-white font-semibold leading-none'>HR Management Portal</div>
               <ThemeButton absolute={false} />
+            <button onClick={()=>{ setSideMenuOpenEmployee(!sideMenuOpenEmployee) }} className='block lg:hidden border rounded-md shadow px-5 py-3 dark:border-slate-700'>
+              <FontAwesomeIcon className='text-lg' icon={faBars} />
+            </button>
             </div>
           </section>
           <section className='flex flex-col xs:flex-row xs:justify-between gap-7 xs:gap-5 p-5 border dark:border-slate-700 rounded-md'>
