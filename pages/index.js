@@ -174,15 +174,18 @@ export default function Index() {
     <>
       <main id='main' className={`flex transition-all duration-500 ${pageVisible ? 'opacity-100' : 'opacity-0'}`}>
         <Navbar />
-        <div className='flex flex-col px-5 py-1 gap-5 flex-grow min-h-screen'>
+        <div className='flex flex-col px-5 py-1 gap-5 flex-grow lg:min-h-screen'>
           <section className='flex items-center justify-between gap-5 mt-5'>
-            <p className='dark:text-white text-gray-600'>Welcome Back, <strong className='font-semibold text-black dark:text-white'>{user?.firstName} {user?.lastName}</strong></p>
+            <div className='lg:hidden'>
+              <Logo />
+            </div>
+            <p className='dark:text-white hidden lg:block text-gray-600'>Welcome Back, <strong className='font-semibold text-black dark:text-white'>{user?.firstName} {user?.lastName}</strong></p>
             <div className="flex items-center gap-5">
-              <div className='flex text-base text-gray-600 dark:text-white font-semibold leading-none'>HR Management Portal</div>
+              <div className='hidden lg:flex text-base text-gray-600 dark:text-white font-semibold leading-none'>HR Management Portal</div>
               <ThemeButton absolute={false} />
             </div>
           </section>
-          <section className='flex gap-5 items-center justify-between p-5 border dark:border-slate-700 rounded-md'>
+          <section className='flex flex-col xs:flex-row xs:justify-between gap-7 xs:gap-5 p-5 border dark:border-slate-700 rounded-md'>
             <div className='flex flex-col gap-3'>
               <span className='text-xs text-slate-600 dark:text-white font-semibold'>Today</span>
               <span className='text-2xl font-bold text-slate-700 dark:text-white'>{dateToday.toLocaleDateString('en-GB', { day: 'numeric', month: 'long', year: 'numeric' })}</span>
@@ -198,33 +201,33 @@ export default function Index() {
                   </div>
               }
             </div>
-            <div className='flex flex-col gap-2 self-start'>
+            <div className='flex flex-col xs:gap-2 gap-3 xs:self-start'>
               {
-                attendMarked ? <button onClick={ ()=>{ markAttendance('Absent'); setCheckInTimeToday(null); setCheckOutTimeToday(null); fetchAttendanceList() } } className='font-semibold px-5 py-2 text-xs text-white bg-red-600 rounded-md'>Mark as Absent</button> :
-                <button onClick={ ()=>{ markAttendance('Present') } } className='font-semibold px-5 py-2 text-xs text-white bg-green-600 rounded-md'>Mark as Present</button>
+                attendMarked ? <button onClick={ ()=>{ markAttendance('Absent'); setCheckInTimeToday(null); setCheckOutTimeToday(null); fetchAttendanceList() } } className='font-semibold px-5 py-4 xs:py-2 xs:text-xs text-sm text-white bg-red-600 rounded-md'>Mark as Absent</button> :
+                <button onClick={ ()=>{ markAttendance('Present') } } className='font-semibold py-4 xs:py-2 xs:text-xs text-sm text-white bg-green-600 rounded-md'>Mark as Present</button>
               }
               {
                 checkInTimeToday ?
-                <div className='border dark:border-transparent flex items-center gap-3 py-2 px-5 bg-green-50 dark:bg-slate-800 rounded-md'>
+                <div className='border dark:border-transparent flex justify-center xs:justify-normal items-center gap-3 xs:py-2 py-4 px-5 bg-green-50 dark:bg-slate-800 rounded-md'>
                   <FontAwesomeIcon icon={faClock} className='leading-none text-sm text-green-600 dark:text-green-400' />
-                  <span className='leading-none text-xs text-green-600 font-semibold dark:text-green-400'>{new Date(checkInTimeToday).toLocaleTimeString('en-US', { hour: '2-digit', minute: '2-digit', hour12: true })}</span>
+                  <span className='leading-none xs:text-xs text-sm text-green-600 font-semibold dark:text-green-400'>{new Date(checkInTimeToday).toLocaleTimeString('en-US', { hour: '2-digit', minute: '2-digit', hour12: true })}</span>
                 </div>
                 :
-                <button onClick={checkIn} className='min-w-full flex gap-3 py-2 px-5 bg-green-600 rounded-md self-start'>
+                <button onClick={checkIn} className='min-w-full flex justify-center xs:justify-normal gap-3 xs:py-2 py-4 px-5 bg-green-600 rounded-md self-start'>
                   <FontAwesomeIcon icon={faCalendarCheck} className='text-sm text-white' />
-                  <span className='text-xs text-white font-semibold'>Check In</span>
+                  <span className='xs:text-xs text-sm text-white font-semibold'>Check In</span>
                 </button>
               }
               {
                 checkOutTimeToday ? 
-                <div className='border dark:border-transparent flex items-center gap-3 py-2 px-5 bg-green-50 dark:bg-slate-800 rounded-md'>
+                <div className='border dark:border-transparent flex justify-center xs:justify-normal items-center gap-3 xs:py-2 py-4 px-5 bg-green-50 dark:bg-slate-800 rounded-md'>
                   <FontAwesomeIcon icon={faPersonWalking} className='leading-none text-sm text-green-600 dark:text-green-400' />
-                  <span className='leading-none text-xs text-green-600 font-semibold dark:text-green-400'>{new Date(checkOutTimeToday).toLocaleTimeString('en-US', { hour: '2-digit', minute: '2-digit', hour12: true })}</span>
+                  <span className='leading-none xs:text-xs text-sm text-green-600 font-semibold dark:text-green-400'>{new Date(checkOutTimeToday).toLocaleTimeString('en-US', { hour: '2-digit', minute: '2-digit', hour12: true })}</span>
                 </div>
                 :
-                <button onClick={checkOut} className='min-w-full flex gap-3 py-2 px-5 bg-violet-600 rounded-md self-start'>
+                <button onClick={checkOut} className='min-w-full flex justify-center xs:justify-normal gap-3 xs:py-2 py-4 px-5 bg-violet-600 rounded-md self-start'>
                   <FontAwesomeIcon icon={faPersonWalking} className='text-sm text-white' />
-                  <span className='text-xs text-white font-semibold'>Check Out</span>
+                  <span className='xs:text-xs text-sm text-white font-semibold'>Check Out</span>
                 </button>
               }
             </div>
@@ -268,16 +271,16 @@ export default function Index() {
           }
           />
 
-          <section>
-            <table className='w-full table-fixed'>
+          <section className='w-screen lg:w-full overflow-x-auto'>
+            <table className='lg:w-full table-fixed'>
               <thead>
                 <tr>
-                  <th className='text-left px-4 py-3 font-semibold text-sm rounded-l-md bg-slate-100 dark:bg-slate-700 dark:text-white'>Date</th>
-                  <th className='text-left py-3 font-semibold text-sm bg-slate-100 dark:bg-slate-700 dark:text-white'>Status</th>
-                  <th className='text-left py-3 font-semibold text-sm bg-slate-100 dark:bg-slate-700 dark:text-white'>Check In</th>
-                  <th className='text-left py-3 font-semibold text-sm bg-slate-100 dark:bg-slate-700 dark:text-white'>Check Out</th>
-                  <th className='text-left py-3 font-semibold text-sm bg-slate-100 dark:bg-slate-700 dark:text-white'>Work Logs</th>
-                  <th className='text-left py-3 font-semibold text-sm rounded-r-md bg-slate-100 dark:bg-slate-700 dark:text-white'>Actions</th>
+                  <th style={{minWidth: '150px'}} className='text-left px-4 py-3 font-semibold text-sm rounded-l-md bg-slate-100 dark:bg-slate-700 dark:text-white'>Date</th>
+                  <th style={{minWidth: '150px'}} className='text-left py-3 font-semibold text-sm bg-slate-100 dark:bg-slate-700 dark:text-white'>Status</th>
+                  <th style={{minWidth: '150px'}} className='text-left py-3 font-semibold text-sm bg-slate-100 dark:bg-slate-700 dark:text-white'>Check In</th>
+                  <th style={{minWidth: '150px'}} className='text-left py-3 font-semibold text-sm bg-slate-100 dark:bg-slate-700 dark:text-white'>Check Out</th>
+                  <th style={{minWidth: '150px'}} className='text-left py-3 font-semibold text-sm bg-slate-100 dark:bg-slate-700 dark:text-white'>Work Logs</th>
+                  <th style={{minWidth: '150px'}} className='text-left py-3 font-semibold text-sm rounded-r-md bg-slate-100 dark:bg-slate-700 dark:text-white'>Actions</th>
                 </tr>
               </thead>
               <tbody>

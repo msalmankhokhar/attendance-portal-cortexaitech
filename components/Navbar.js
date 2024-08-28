@@ -32,7 +32,7 @@ export default function Navbar({adminMode = false}) {
   // console.log(pathname.startsWith('/admin'))
 
   return (
-    <nav className="flex flex-col gap-7 py-3 px-3 w-full shadow-md dark:border-r-2 border-slate-600" style={{ minWidth: '240px', maxWidth: '240px' }}>
+    <nav className="hidden lg:flex flex-col gap-7 py-3 px-3 w-full shadow-md dark:border-r-2 border-slate-600" style={{ minWidth: '240px', maxWidth: '240px' }}>
       <div className='flex flex-col gap-2'>
         <Logo />
         {/* <span className='dark:text-white font-semibold text-slate-600 text-sm self-center'>HR Management Portal</span> */}

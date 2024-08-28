@@ -10,7 +10,7 @@ const connectDB = (handler) => async (req,res)=> {
         return handler(req, res)
     }
     try{
-        await mongoose.connect(process.env.MONGO_URI_PROD)
+        await mongoose.connect(process.env.MONGO_URI)
         console.log('Database Connected Successfully')
     } catch(error){
         console.log('Database Connection failed', error)
